@@ -43,7 +43,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_controlSlider_sliderMoved(int position)
 {
     ui->controlSlider->setMinimum(0);
-    ui->controlSlider->setMaximum(90);
+    ui->controlSlider->setMaximum(50);
     QString index = QString::number(position);
     QProcess p;
     QString printf = "echo " + index + " > /sys/class/backlight/buzzer_pwm/brightness | sudo -S";
