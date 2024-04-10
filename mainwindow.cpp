@@ -32,8 +32,8 @@ const QString path = "/sys/class/backlight/buzzer_pwm/brightness";
 MainWindow::~MainWindow()
 {
     QProcess p;
-    QString printf = "echo 0 >" + path + " | sudo -S";
-    p.start("bash", QStringList() <<"-c" <<printf);
+    QString echoPath = "echo 0 >" + path + " | sudo -S";
+    p.start("bash", QStringList() <<"-c" <<echoPath);
     p.waitForFinished();
     p.kill();
     delete ui;
@@ -46,8 +46,8 @@ void MainWindow::on_controlSlider_sliderMoved(int position)
     ui->controlSlider->setMaximum(50);
     QString index = QString::number(position);
     QProcess p;
-    QString printf = "echo " + index + " > " + path + " | sudo -S";
-    p.start("bash", QStringList() <<"-c" <<printf);
+    QString echoPath = "echo " + index + " > " + path + " | sudo -S";
+    p.start("bash", QStringList() <<"-c" <<echoPath);
     p.waitForFinished();
     p.kill();
     ui->txt_volume->setText("value:"+index);
@@ -58,8 +58,8 @@ void MainWindow::on_controlSlider_sliderMoved(int position)
 void MainWindow::on_pushButton_clicked()
 {
     QProcess p;
-    QString printf = "echo 0 > " + path + " | sudo -S";
-    p.start("bash", QStringList() <<"-c" <<printf);
+    QString echoPath = "echo 0 > " + path + " | sudo -S";
+    p.start("bash", QStringList() <<"-c" <<echoPath);
     p.waitForFinished();
     p.kill();
     MainWindow::close();
