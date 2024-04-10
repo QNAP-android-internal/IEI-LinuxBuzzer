@@ -28,11 +28,11 @@ MainWindow::MainWindow(QWidget *parent)
                     "}";
     ui->controlSlider->setStyleSheet(style);
 }
-
+const QString path = "/sys/class/backlight/buzzer_pwm/brightness";
 MainWindow::~MainWindow()
 {
     QProcess p;
-    QString printf = "echo 0 > /sys/class/backlight/buzzer_pwm/brightness | sudo -S";
+    QString printf = "echo 0 >" + path + " | sudo -S";
     p.start("bash", QStringList() <<"-c" <<printf);
     p.waitForFinished();
     p.kill();
@@ -46,7 +46,7 @@ void MainWindow::on_controlSlider_sliderMoved(int position)
     ui->controlSlider->setMaximum(50);
     QString index = QString::number(position);
     QProcess p;
-    QString printf = "echo " + index + " > /sys/class/backlight/buzzer_pwm/brightness | sudo -S";
+    QString printf = "echo " + index + " > " + path + " | sudo -S";
     p.start("bash", QStringList() <<"-c" <<printf);
     p.waitForFinished();
     p.kill();
@@ -58,7 +58,7 @@ void MainWindow::on_controlSlider_sliderMoved(int position)
 void MainWindow::on_pushButton_clicked()
 {
     QProcess p;
-    QString printf = "echo 0 > /sys/class/backlight/buzzer_pwm/brightness | sudo -S";
+    QString printf = "echo 0 > " + path + " | sudo -S";
     p.start("bash", QStringList() <<"-c" <<printf);
     p.waitForFinished();
     p.kill();
